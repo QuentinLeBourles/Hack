@@ -1,8 +1,8 @@
 (function() {
 
-    var graph = raw.models.graph();
+    let graph = raw.models.graph();
 
-    var chart = raw.chart()
+    let chart = raw.chart()
         .title('Alluvial Diagram')
         .description(
             "Alluvial diagrams allow to represent flows and to see correlations between categorical dimensions, visually linking to the number of elements sharing the same categories. It is useful to see the evolution of cluster (such as the number of people belonging to a specific group). It can also be used to represent bipartite graphs, using each node group as dimensions.<br/>Mainly based on DensityDesign's work with Fineo, it is inspired by <a href='https://bl.ocks.org/mbostock/ca9a0bb7ba204d12974bca90acc507c0'>https://bl.ocks.org/mbostock/ca9a0bb7ba204d12974bca90acc507c0</a>")
@@ -10,48 +10,48 @@
         .category("Multi categorical")
         .model(graph);
 
-    var width = chart.number()
+    let width = chart.number()
         .title("Width")
         .defaultValue(1000)
         .fitToWidth(true);
 
-    var height = chart.number()
+    let height = chart.number()
         .title("Height")
         .defaultValue(500);
 
-    var nodeWidth = chart.number()
+    let nodeWidth = chart.number()
         .title("Node Width")
         .defaultValue(5);
 
-    var opacity = chart.number()
+    let opacity = chart.number()
         .title("Links opacity")
         .defaultValue(.4);
 
-    var sortBy = chart.list()
+    let sortBy = chart.list()
         .title("Sort by")
         .values(['size', 'name', 'automatic'])
         .defaultValue('size');
 
-    var colors = chart.color()
+    let colors = chart.color()
         .title("Color scale");
 
     chart.draw((selection, data) => {
 
         // get the drawing area
-        var g = selection
+        let g = selection
             .attr("width", +width())
             .attr("height", +height() + 20)
             .append("g")
             .attr("transform", "translate(0, 10)");
 
         // define numbers formatting
-        var formatNumber = d3.format(",.0f"),
+        let formatNumber = d3.format(",.0f"),
             format = function(d) {
                 return formatNumber(d);
             };
 
         // Calculating the best nodePadding (TODO: improve)
-        var nested = d3.nest()
+        let nested = d3.nest()
             .key(function(d) {
                 return d.group;
             })
@@ -60,13 +60,13 @@
             })
             .entries(data.nodes);
 
-        var maxNodes = d3.max(nested, function(d) {
+        let maxNodes = d3.max(nested, function(d) {
             return d.values;
         });
-        var bestPadding = d3.min([height() - maxNodes / maxNodes])
+        let bestPadding = d3.min([height() - maxNodes / maxNodes])
 
         // create sankey object
-        var sankey = d3.sankey()
+        let sankey = d3.sankey()
             .nodeWidth(+nodeWidth())
             .nodePadding(bestPadding)
             .size([+width(), +height()]);
@@ -92,7 +92,7 @@
         })
 
         // Re-sorting nodes
-        var nested = d3.nest()
+        let nested = d3.nest()
             .key(function(d) {
                 return d.group;
             })
@@ -101,7 +101,7 @@
         nested
             .forEach(function(d) {
 
-                var y = (height() - d3.sum(d.values, function(n) {
+                let y = (height() - d3.sum(d.values, function(n) {
                     return n.dy + sankey.nodePadding();
                 })) / 2 + sankey.nodePadding() / 2;
 
@@ -110,7 +110,7 @@
                     if (sortBy() == "size") return b.dy - a.dy;
                     if (sortBy() == "name") return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
                     if (sortBy() == "name") {
-                        var a1 = typeof a.name,
+                        let a1 = typeof a.name,
                             b1 = typeof b.name;
                         return a1 < b1 ? -1 : a1 > b1 ? 1 : a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
                     }
@@ -128,7 +128,7 @@
 
             d.values.forEach(function(node) {
 
-                var ly = node.y0;
+                let ly = node.y0;
 
                 node.sourceLinks
                     .sort(function(a, b) {
@@ -153,7 +153,7 @@
         })
 
         //prepare link
-        var link = g.append("g")
+        let link = g.append("g")
             .attr("class", "links")
             .attr("fill", "none")
             .attr("stroke-opacity", +opacity())
@@ -170,7 +170,7 @@
 
 
         //prepare node
-        var node = g.append("g")
+        let node = g.append("g")
             .attr("class", "nodes")
             .attr("font-family", "Arial, Helvetica")
             .attr("font-size", 10)
