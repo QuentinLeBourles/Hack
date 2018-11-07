@@ -8,6 +8,7 @@ import Chart1  from "./components/Chart1";
 import Chart2 from './components/Chart2';
 import Chart3 from './components/Chart3';
 import Chart4 from './components/Chart4';
+import SelectOption from './components/SelectOption';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <FileUpload />
+        <SelectOption />
         <NavChart />
         <BrowserRouter>
         <Switch>
@@ -24,6 +26,9 @@ class App extends Component {
           <Route
             path="/Chart2"
             component={Chart2} />
+          <Route
+            path="/Chart3"
+            component={Chart3} />
             <Route
             path="/Chart4"
             component={Chart4} />

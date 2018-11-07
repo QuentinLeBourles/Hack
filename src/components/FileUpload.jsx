@@ -70,7 +70,7 @@ class FileUpload extends React.Component {
     return (
         <Container>
             <form /* action="../csv2json.php" method="post" encType="multipart/form-data" */ onSubmit={this.onFormSubmit}>
-                <h2>Turn file to chart</h2>
+                <h2>Insert your file</h2>
                 <hr></hr>
                 <input type="file" name='file' onChange={this.onChange} />
                 <button className="buttonInp" type="submit">Upload</button>
