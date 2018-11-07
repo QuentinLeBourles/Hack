@@ -12,6 +12,7 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 import './NavBar.css'
+import logo from './images/logo-ck.png';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class NavBar extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
   }
   toggle() {
@@ -31,15 +32,15 @@ export default class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/"><img width='100' src="https://pbs.twimg.com/profile_images/822380459300507648/yv_UwcWb_400x400.jpg" alt="logo epidemium"/>EPIDEMIUM Charts</NavbarBrand>
+          <NavbarBrand href="/"><img width='40' src={logo}alt="epidemium logo" className="mr-3"/>EPIDEMIUM Charts</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Epidemium</NavLink>
+                <NavLink className="text-titre" href="http://epidemium.cc/index.html">Epidemium</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                <NavLink href="http://epidemium.cc/index.html">Contact</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
