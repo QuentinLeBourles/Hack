@@ -1,15 +1,10 @@
 .buttonInp{
     background-color: white;
-    border-radius: 8px;
-    border: 2px solid #42d9b7;
+    border-radius:6px;
+    border: 2px solid #2B328E;
     font-weight: bold;
-    outline: none;
-}
-.buttonInp:hover{
-    background-color: aqua;
-    color: #293787;
 }
 input{
     border-radius: 8px;
-    border: 2px solid #42d9b7;
+    border: 2px solid #2B328E;
 }

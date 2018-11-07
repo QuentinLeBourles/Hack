@@ -68,6 +68,7 @@ class FileUpload extends React.Component {
   render() {
     return (
         <Container>
+
             <form className='mb-5'onSubmit={this.onFormSubmit}>
                 <h2>Turn file to chart</h2>
                 <hr></hr>
