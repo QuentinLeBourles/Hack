@@ -8,6 +8,7 @@ import Chart1  from "./components/Chart1";
 import Chart2 from './components/Chart2';
 import Chart3 from './components/Chart3';
 import Chart4 from './components/Chart4';
+import Footer from './components/Footer';
 
 class App extends Component {
   render() {
@@ -29,6 +30,8 @@ class App extends Component {
             component={Chart4} />
         </Switch>
         </BrowserRouter>
+        <hr className="m-0"/>
+        <Footer />
       </div>
     );
   }
