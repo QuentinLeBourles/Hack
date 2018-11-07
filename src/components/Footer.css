@@ -1,0 +1,9 @@
+.Footer{
+    background-color: beige !important;
+    z-index: 1000 !important;
+}
+.bulle {
+    border-radius: 50%;
+    background-color: lightslategray;
+    z-index: 1000;
+}

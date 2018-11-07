@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { VictoryChart, VictoryGroup, VictoryStack, VictoryBar } from 'victory';
 import {Container } from 'reactstrap'
@@ -47,3 +48,4 @@ class Chart3 extends React.Component {
 }
  
 export default Chart3;
+
