@@ -1,4 +1,6 @@
 import React from 'react'
+import Axios from 'axios';
+/* import urlPhp from '../csv2json.php' */
 
 class FileUpload extends React.Component {
 
@@ -12,16 +14,18 @@ class FileUpload extends React.Component {
   }
 
   onFormSubmit(e){
+
+    e.preventDefault();
+
     let formData = new FormData();
         formData.append('file', this.state.file);
-    console.log(formData);
 
     const config = {
-        method: 'POST',
-        headers: {"Authorization": localStorage.getItem("token")},
-        body: formData
+        headers: { 
+            'Content-Type': 'multipart/form-data',},
+        body: formData,
        };
-       
+
    /*  const config = {
         method: "POST",
         headers: {
@@ -30,14 +34,13 @@ class FileUpload extends React.Component {
         body: JSON.stringify(this.state.post),
     }; */
     
-    const url = "";
+    const url = 'localhost:8000/src/csv2json.php';
 
-    e.preventDefault();
-    
-    fetch(url, config)
+    Axios.post(url, this.state.file, config)
+   /*  fetch(url, config) */
     .then(res => {
         console.log(res)
-        res.json()})
+        res.text()})
     .then(res => {
     if (res.error) {
         console.log(res.error);
@@ -50,6 +53,7 @@ class FileUpload extends React.Component {
     console.error('erreur de mes deux', e);
     console.log('Erreur lors de l\'envoi du fichier');
     });
+    
   }
 
   onChange(e) {
@@ -58,7 +62,7 @@ class FileUpload extends React.Component {
   
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
+      <form /* action="../csv2json.php" method="post" encType="multipart/form-data" */ onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
         <input type="file" onChange={this.onChange} />
         <button type="submit">Upload</button>
