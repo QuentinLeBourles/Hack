@@ -1,5 +1,7 @@
 import React from 'react'
 import Axios from 'axios';
+import './FileUpload.css'
+import {Container} from 'reactstrap';
 /* import urlPhp from '../csv2json.php' */
 
 class FileUpload extends React.Component {
@@ -14,7 +16,7 @@ class FileUpload extends React.Component {
   }
 
   onFormSubmit(e){
-
+    console.log("file", this.state.file)
     e.preventDefault();
 
     let formData = new FormData();
@@ -22,10 +24,12 @@ class FileUpload extends React.Component {
 
     const config = {
         headers: { 
-            'Content-Type': 'multipart/form-data',},
+            'Access-Control-Allow-Origin' : '*',
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+            'Content-Type': 'multipart/form-data',
+        },
         body: formData,
        };
-
    /*  const config = {
         method: "POST",
         headers: {
@@ -34,16 +38,17 @@ class FileUpload extends React.Component {
         body: JSON.stringify(this.state.post),
     }; */
     
-    const url = 'localhost:8000/src/csv2json.php';
+    const url = 'http://0.0.0.0:8000/src/csv2json.php';
 
-    Axios.post(url, this.state.file, config)
+    Axios.post(url, config)
    /*  fetch(url, config) */
     .then(res => {
-        console.log(res)
-        res.text()})
+        console.log('la reponse',res)
+        return res.json();
+    })
     .then(res => {
     if (res.error) {
-        console.log(res.error);
+        console.log('le drame', res.error);
     } else {
         console.log(`Fichier ajouté avec l'ID ${res}!`);
         console.log(res);
@@ -58,15 +63,19 @@ class FileUpload extends React.Component {
 
   onChange(e) {
     this.setState({file:e.target.files[0]})
+    console.log(e.target.files[0])
   }
   
   render() {
     return (
-      <form /* action="../csv2json.php" method="post" encType="multipart/form-data" */ onSubmit={this.onFormSubmit}>
-        <h1>File Upload</h1>
-        <input type="file" onChange={this.onChange} />
-        <button type="submit">Upload</button>
-      </form>
+        <Container>
+            <form /* action="../csv2json.php" method="post" encType="multipart/form-data" */ onSubmit={this.onFormSubmit}>
+                <h2>Turn file to chart</h2>
+                <hr></hr>
+                <input type="file" name='file' onChange={this.onChange} />
+                <button className="buttonInp" type="submit">Upload</button>
+            </form>
+        </Container>      
    )
   }
 }

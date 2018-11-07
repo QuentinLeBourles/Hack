@@ -5,9 +5,10 @@
  * Date: 06/11/18
  * Time: 18:20
  */
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    header("Content-Type: application/json; charset=UTF-8");
+    echo($_POST['file']);
     if (($handle = fopen("data.csv", "r")) !== FALSE) {
         $rows = [];
         while (!feof($handle)) {
@@ -28,6 +29,5 @@ header("Content-Type: application/json; charset=UTF-8");
         }
         $json = json_encode($data);
         fclose($handle);
-        return $json;
-        header('Location : /', 200);
+        return "[{'test': 'toto'}]";
     }
