@@ -5,8 +5,9 @@
  * Date: 06/11/18
  * Time: 18:20
  */
-function csv2json()
-{
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+
     if (($handle = fopen("data.csv", "r")) !== FALSE) {
         $rows = [];
         while (!feof($handle)) {
@@ -28,5 +29,5 @@ function csv2json()
         $json = json_encode($data);
         fclose($handle);
         return $json;
+        header('Location : /', 200);
     }
-}
