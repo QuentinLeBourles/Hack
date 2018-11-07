@@ -31,16 +31,6 @@ const data = [
             y="earnings"
           />
         </VictoryChart>
-        <VictoryChart
-        theme={VictoryTheme.material}
-        domainPadding={{ x: 25 }}
-        scale={{ x: "time" }}
-      />
-      <VictoryAxis tickFormat={(t) => `${Date.now()}`}/>
-      <VictoryCandlestick
-        candleColors={{ positive: "#5f5c5b", negative: "#c43a31" }}
-        data={data}
-      />
       <VictoryChart/>
       <VictoryChart
   theme={VictoryTheme.material}
